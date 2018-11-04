@@ -44,16 +44,16 @@
 		<p>&#169; Will Madl - 2018</p>
 		<br>
 		<script>
-			
+
 			// A canvas is used to draw graphics (using a 2d context)
 			var canvas = document.getElementById('game');
 			var context = canvas.getContext('2d');
-			
+
 			// The size of the player (width and height)
 			var gridSize = 16;
-			
+
 			var start = false;
-			
+
 			var scoreRed = 0;
 			var scoreGreen = 0;
 			var scoreYellow = 0;
@@ -70,18 +70,18 @@
 
 				// Combine move and draw into one function called update
 				this.update = function() {
-					
+
 					// Move the player
 					this.x = this.x + this.speedX;
 					this.y = this.y + this.speedY;
-					
+
 					// Then draw the player
 					context.fillStyle = playerColour;
 					context.fillRect(this.x, this.y, gridSize-1, gridSize-(-100));
-					
+
 				};
 			}
-			
+
 			function playerPrototype2(playerColour2) {
 				this.x = 400-gridSize/2;
 				this.y = 300-gridSize/2;
@@ -90,18 +90,18 @@
 
 				// Combine move and draw into one function called update
 				this.update = function() {
-					
+
 					// Move the player
 					this.x = this.x + this.speedX;
 					this.y = this.y + this.speedY;
-					
+
 					// Then draw the player
 					context.fillStyle = playerColour2;
 					context.fillRect(this.x, this.y, gridSize-(-100), gridSize-1);
-					
+
 				};
 			}
-			
+
 			function ball(ballColour) {
 				this.x = 400-gridSize/2;
 				this.y = 300-gridSize/2;
@@ -110,51 +110,51 @@
 
 				// Combine move and draw into one function called update
 				this.update = function() {
-					
+
 					// Move the ball
 					this.x = this.x + this.speedX;
 					this.y = this.y + this.speedY;
-					
+
 					// Then draw the ball
 					context.fillStyle = ballColour;
 					context.fillRect(this.x, this.y, gridSize-1, gridSize-1);
-					
+
 				};
 			}
-			
+
 			// Set the colour of player to lime, and use the prototype
 			var player = new playerPrototype('blue');
-			
+
 			// Add a second player using the same prototype, with a different colour
 			var player2 = new playerPrototype('red');
-			
+
 			// Add a second player using the same prototype, with a different colour
 			var player3 = new playerPrototype2('green');
-			
+
 			// Add a second player using the same prototype, with a different colour
 			var player4 = new playerPrototype2('yellow');
-			
+
 			var ball = new ball('white');
-			
+
 			// Game loop
 			function loop() {
-				
+
 				if (player.x != 20){
 					player.x = 20;
 				}
-				
+
 				if (player2.x != 761){
-					player2.x = 761;	
+					player2.x = 761;
 				}
-				
+
 				if (player3.y != 20){
 					player3.y = 20;
 				}
-				
+
 				if (player4.y != 561){
-					player4.y = 561;	
+					player4.y = 561;
 				}
-				
+
 				if (player.x >= 761){
                     player.speedX = -6;
 				} if (player.x <= 20){
@@ -163,8 +163,8 @@
                	 	player.speedY = -6;
 				} if (player.y <= 20){
                 	player.speedY = 6;
-        		} 
-				
+        		}
+
 				if (player2.x >= 761){
                     player2.speedX = -6;
 				} if (player2.x <= 20){
@@ -173,8 +173,8 @@
                 	player2.speedY = -6;
 				} if (player2.y <= 20){
                 	player2.speedY = 6;
-        		} 
-				
+        		}
+
 				if (player3.x >= 761){
                     player3.speedX = -7;
 				} if (player3.x <= 20){
@@ -183,8 +183,8 @@
                 	player3.speedY = -7;
 				} if (player3.y <= 20){
                 	player3.speedY = 7;
-        		} 
-				
+        		}
+
 				if (player4.x >= 761){
                     player4.speedX = -7;
 				} if (player4.x <= 20){
@@ -193,8 +193,8 @@
                 	player4.speedY = -7;
 				} if (player4.y <= 20){
                 	player4.speedY = 7;
-        		} 
-				
+        		}
+
 				if (ball.x >= 761){
                     ball.speedX = -5;
 					scoreRed ++;
@@ -207,40 +207,40 @@
 				} if (ball.y <= 20){
                 	ball.speedY = 5;
 					scoreGreen ++;
-        		} 
-				
+        		}
+
 				/*if (ball.x < 50 && (player.y + 100) == ball.y) {
 					alert('hi');
 				}
-				
+
 				if (ball.y > player.y && ball.y > player.y +100){
 					alert("xdfg")
 				}*/
-				
+
 				if (ball.x < 20) {
 					if (ball.y > player.y && ball.y < player.y+100){
 						scoreBlue --;
 					}
 				}
-				
+
 				if (ball.x > 761) {
 					if (ball.y > player2.y && ball.y < player2.y+100){
 						scoreRed --;
 					}
 				}
-				
+
 				if (ball.y < 20) {
 					if (ball.x > player3.x && ball.x < player3.x+100){
 						scoreGreen --;
 					}
 				}
-				
+
 				if (ball.y > 561) {
 					if (ball.x > player4.x && ball.x < player4.x+100){
 						scoreYellow --;
 					}
 				}
-				
+
 				// Clear the context so objects can be redrawn
 				context.clearRect(0,0,canvas.width,canvas.height);
 
@@ -255,9 +255,9 @@
 				requestAnimationFrame(loop);
 			}
 
-			// Event listeners enable the players to interact, with events such as mouse clicks or keys being pressed 
+			// Event listeners enable the players to interact, with events such as mouse clicks or keys being pressed
 			document.addEventListener('keydown', function(e) {
-				
+
 				// Player 1 - WASD Keys
 				if (e.key == "a") {
 					player.speedY = 6;
@@ -269,7 +269,7 @@
 					player.speedX = 0;
 					player.speedY = 0;
 				}
-				
+
 				//Player - IJKL Keys
 				if (e.key == "/") {
 					player2.speedY = 6;
@@ -281,7 +281,7 @@
 					player2.speedX = 0;
 					player2.speedY = 0;
 				}
-				
+
 				// Player 3 - Arrow Keys | Players 3 and 4 are slightly faster to make up for the rectangular playing field to make the game fair. I noticed too late on to change.
 				if (e.key == "[") {
 					player3.speedX = -7;
@@ -293,7 +293,7 @@
 					player3.speedX = 0;
 					player3.speedY = 0;
 				}
-				
+
 				// Player 4 - TFGH Keys
 				if (e.key == "z") {
 					player4.speedX = -7;
@@ -305,31 +305,31 @@
 					player4.speedX = 0;
 					player4.speedY = 0;
 				}
-				
-				if (e.key !== "q" && e.key !== "a" && e.key !== "[" && e.key !== "]" && e.key !== "ArrowUp" && e.key !== "ArrowDown" && e.key !== "z" && e.key !== "x" && e.key !== "w" && e.key !== "s" && e.key !== "1" && e.key !== "2" && e.key !== "Alt" && e.key !== "Shift" && e.key !== "ArrowLeft" && e.key !== "Delete" && e.key !== "=" && e.key !== "-" && e.key !== "p" && e.key !== "'" && e.key !== ";" && e.key !== "c" && e.key !== "Tab" && e.key !== "." && e.key !== "/" && e.key !== "Enter" && e.key !== "r") {
+
+				if (e.key !== "q" && e.key !== "a" && e.key !== "[" && e.key !== "]" && e.key !== "ArrowUp" && e.key !== "ArrowDown" && e.key !== "z" && e.key !== "x" && e.key !== "w" && e.key !== "s" && e.key !== "1" && e.key !== "2" && e.key !== "Alt" && e.key !== "Shift" && e.key !== "ArrowLeft" && e.key !== "Delete" && e.key !== "=" && e.key !== "-" && e.key !== "p" && e.key !== "'" && e.key !== ";" && e.key !== "c" && e.key !== "Tab" && e.key !== "." && e.key !== "/" && e.key !== "Enter" && e.key !== "r" && e.key !== "Meta") {
 				ball.speedX = 4;
 				ball.speedY = 3;
 				start = true;
 				}
-				
+
 				if (scoreRed >= 10) {
 					player2.speedY = 0;
 				}
-				
+
 				if (scoreBlue >= 10) {
 					player.speedY = 0;
 				}
-				
+
 				if (scoreYellow >= 10) {
 					player4.speedX = 0;
 				}
-				
+
 				if (scoreGreen >= 10) {
 					player3.speedX = 0;
 				}
-				
+
 			});
-			
+
 			// Start the game by calling the first frame
 			requestAnimationFrame(loop);
 		</script>
